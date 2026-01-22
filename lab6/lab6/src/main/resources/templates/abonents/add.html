@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>Add Abonent</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <style> /* Global Stylesheet */
+
+/* General Body Styling */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa; /* Light background */
+    color: #343a40; /* Dark text */
+    line-height: 1.6;
+}
+p {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.option-select{
+    display: block;
+    width: 100%;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+/* Header Styles */
+h1, h2, h3 {
+    text-align: center;
+    color: #495057;
+    margin-top: 20px;
+}
+
+/* Links */
+a {
+    color: #E63950; /* Soft pinkish-red for the default link color */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #D0263C; /* Slightly darker pink on hover */
+    text-decoration: underline; /* Adds a hover effect for better UX */
+}
+
+a:active {
+    color: #A81E2F; /* Even darker pink when clicked */
+}
+
+/* Combined Button Styles */
+input[type="submit"], button {
+    background-color: #E3BAC6; /* Soft pink */
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: block;
+    margin: 10px auto;
+    width: 50%;
+}
+
+/* Button Hover Effect */
+input[type="submit"]:hover, button:hover {
+    background-color: #D39CA4; /* Slightly darker pink */
+    transform: scale(1.05);
+}
+
+/* Button Active State */
+input[type="submit"]:active, button:active {
+    background-color: #C18A91; /* Deeper pink for active state */
+    transform: scale(0.95);
+}
+input[type="text"], textarea {
+    width: 80%;
+    margin: 15px auto;
+    padding: 10px;
+    border: 1px solid #cbd5e0;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #2d3748;
+    background-color: #ffffff;
+    display: block;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus, textarea:focus {
+    border-color: #3182ce;
+    box-shadow: 0 0 8px rgba(49, 130, 206, 0.5);
+    outline: none;
+}
+input[type="password"], textarea {
+    width: 80%;
+    margin: 15px auto;
+    padding: 10px;
+    border: 1px solid #cbd5e0;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #2d3748;
+    background-color: #ffffff;
+    display: block;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="password"]:focus, textarea:focus {
+    border-color: #3182ce;
+    box-shadow: 0 0 8px rgba(49, 130, 206, 0.5);
+    outline: none;
+}
+/* Table Styles */
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+td {
+    background-color: #ffffff;
+}
+
+tr:nth-child(even) td {
+    background-color: #f2f2f2;
+}
+
+tr:hover td {
+    background-color: #e9ecef;
+    cursor: pointer;
+}
+
+form {
+    margin: 20px auto;
+    display: block;
+    text-align: center;
+}
+
+.container {
+    text-align: center;
+    margin-top: 20px;
+}
+/*
+Header main footer
+*/
+
+header {
+  min-height: 50px;
+  background: #E3BAC6;
+}
+main {
+    flex: 1;
+}
+
+
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background-color: #E3BAC6;
+    margin-top: auto;
+}
+  </style>
+</head>
+
+<body>
+
+<h1>Add Abonent</h1>
+
+<form th:action="@{../../abonents/add}" method="POST">
+  <div>
+    <label for="Name">Surname Name:</label>
+    <input type="text" id="Name" name="Name" required />
+  </div>
+
+  <div>
+    <label for="Phone">Phone:</label>
+    <input type="text" id="Phone" name="Phone" required />
+  </div>
+  <div>
+
+    <label for="Email">Email:</label>
+    <input type="text" id="Email" name="Email" required />
+  </div>
+  <div>
+    <button type="submit">Add Abonent</button>
+  </div>
+</form>
+
+<div th:if="${success}">
+  <p>Abonent added successfully!</p>
+</div>
+
+<div th:if="${error}">
+  <p th:text="${error}"></p>
+</div>
+
+<p>
+  <a href="../home.html" th:href="@{/}">Return to home</a>
+</p>
+
+</body>
+
+</html>

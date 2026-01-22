@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence" version="3.0">
+    <persistence-unit name="YourPersistenceUnitName" transaction-type="RESOURCE_LOCAL">
+        <!-- Классы, помеченные как @Entity -->
+        <class>model.Abonent</class>
+        <class>model.Service</class>
+        <class>model.Account</class>
+        <class>model.AbonentService</class>
+
+        <!-- Параметры подключения к базе данных -->
+        <properties>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:sqlserver://localhost:49675;databaseName=TelStation;trustServerCertificate=true"/>
+            <property name="jakarta.persistence.jdbc.user" value="sa"/>
+            <property name="jakarta.persistence.jdbc.password" value="1"/>
+            <property name="jakarta.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+
+            <!-- Дополнительные настройки для Hibernate -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.SQLServerDialect"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+        </properties>
+    </persistence-unit>
+</persistence>

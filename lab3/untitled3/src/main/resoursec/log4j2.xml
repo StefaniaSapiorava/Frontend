@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn" name="AirlineSystemLogging">
+    <Appenders>
+        <!-- Лог для сообщений DEBUG -->
+        <RollingFile name="DebugFile" fileName="logs/debug.log" filePattern="logs/debug-%d{MM-dd-yyyy}-%i.log" append="true">
+            <LevelRangeFilter minLevel="debug" maxLevel="debug" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout>
+                <Pattern>%d{HH:mm:ss} [%t] %-5level %logger{36} - %msg%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="250 MB"/>
+            </Policies>
+        </RollingFile>
+
+        <!-- Лог для сообщений INFO -->
+        <RollingFile name="InfoFile" fileName="logs/info.log" filePattern="logs/info-%d{MM-dd-yyyy}-%i.log" append="true">
+            <LevelRangeFilter minLevel="info" maxLevel="info" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout>
+                <Pattern>%d{HH:mm:ss} [%t] %-5level %logger{36} - %msg%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="250 MB"/>
+            </Policies>
+        </RollingFile>
+
+        <!-- Лог для сообщений WARN -->
+        <RollingFile name="WarnFile" fileName="logs/warn.log" filePattern="logs/warn-%d{MM-dd-yyyy}-%i.log" append="true">
+            <LevelRangeFilter minLevel="warn" maxLevel="warn" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout>
+                <Pattern>%d{HH:mm:ss} [%t] %-5level %logger{36} - %msg%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="250 MB"/>
+            </Policies>
+        </RollingFile>
+
+        <!-- Лог для сообщений ERROR -->
+        <RollingFile name="ErrorFile" fileName="logs/error.log" filePattern="logs/error-%d{MM-dd-yyyy}-%i.log" append="true">
+            <LevelRangeFilter minLevel="error" maxLevel="error" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout>
+                <Pattern>%d{HH:mm:ss} [%t] %-5level %logger{36} - %msg%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="250 MB"/>
+            </Policies>
+        </RollingFile>
+
+        <!-- Консольный вывод -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss} %-5level %logger{36} - %msg%n"/>
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <!-- Логгер для основных компонентов приложения -->
+        <Logger name="dao" level="debug" additivity="false">
+            <AppenderRef ref="DebugFile"/>
+            <AppenderRef ref="InfoFile"/>
+            <AppenderRef ref="WarnFile"/>
+            <AppenderRef ref="ErrorFile"/>
+        </Logger>
+
+        <!-- Логгер для корневых сообщений -->
+        <Root level="debug">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="DebugFile"/>
+            <AppenderRef ref="InfoFile"/>
+            <AppenderRef ref="WarnFile"/>
+            <AppenderRef ref="ErrorFile"/>
+        </Root>
+    </Loggers>
+</Configuration>
